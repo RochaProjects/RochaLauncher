@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rocha Launcher - Downloads</title>
+  <style>
+    :root {
+      --bg: #09040f;
+      --panel: #170d26;
+      --panel-2: #211137;
+      --stroke: #4d2b73;
+      --text: #f0e8ff;
+      --muted: #b9a8d9;
+      --primary: #8a3ffc;
+      --primary-2: #6f2ed3;
+      --ok: #49c58f;
+      --warn: #f5bc54;
+      --danger: #ff6f8c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans", Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(1200px 700px at 85% -10%, #2a1348 0%, transparent 55%),
+        radial-gradient(900px 500px at -15% 110%, #180a2f 0%, transparent 60%),
+        radial-gradient(700px 260px at 50% 105%, rgba(86, 43, 160, 0.35) 0%, transparent 70%),
+        var(--bg);
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #1d0f31 0%, #150b24 100%);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      line-height: 1.2;
+      font-weight: 750;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .release {
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .chip {
+      border: 1px solid #5d3788;
+      background: #25143d;
+      color: #e6d8ff;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      border-color: #a37dff;
+      background: #3a1f62;
+      color: #fff;
+    }
+
+    .section {
+      margin-top: 18px;
+      background: var(--panel);
+      border: 1px solid rgba(122, 79, 184, 0.72);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow:
+        0 16px 34px rgba(0, 0, 0, 0.32),
+        inset 0 1px 0 rgba(186, 148, 255, 0.18);
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: 1.1rem;
+    }
+
+    .device-switch {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid #54307d;
+      border-radius: 14px;
+      background: var(--panel-2);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      min-height: 150px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .meta {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      min-height: 2.6em;
+    }
+
+    .status {
+      margin-top: 10px;
+      color: var(--warn);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .btn {
+      margin-top: auto;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      border: 1px solid #6e40a4;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--primary-2) 100%);
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .btn[aria-disabled="true"] {
+      background: #3a2b53;
+      border-color: #53406f;
+      color: #b9a8d9;
+      pointer-events: none;
+    }
+
+    .foot {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .ok { color: var(--ok); }
+    .danger { color: var(--danger); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <h1 class="title">Rocha Launcher - Downloads</h1>
+      <p class="subtitle">Escolha seu dispositivo. Android baixa APK direto do ultimo release publico.</p>
+      <div class="release">
+        <span id="release-status">Buscando ultimo release...</span>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>Dispositivo</h2>
+      <div class="device-switch" role="tablist" aria-label="Escolha de dispositivo">
+        <button class="chip active" data-device="android" role="tab" aria-selected="true">Android</button>
+        <button class="chip" data-device="windows" role="tab" aria-selected="false">Windows</button>
+        <button class="chip" data-device="linux" role="tab" aria-selected="false">Linux</button>
+      </div>
+
+      <div id="panel-android" role="tabpanel">
+        <div class="card-grid">
+          <article class="card">
+            <h3>Android arm64-v8a</h3>
+            <p class="meta" id="meta-arm64">Aguardando release...</p>
+            <a class="btn" id="btn-arm64" href="#" aria-disabled="true">Download arm64-v8a</a>
+          </article>
+
+          <article class="card">
+            <h3>Android armeabi-v7a (32-bit)</h3>
+            <p class="meta" id="meta-armv7">Aguardando release...</p>
+            <a class="btn" id="btn-armv7" href="#" aria-disabled="true">Download armeabi-v7a</a>
+          </article>
+
+          <article class="card">
+            <h3>Android x86_64</h3>
+            <p class="meta" id="meta-x64">Aguardando release...</p>
+            <a class="btn" id="btn-x64" href="#" aria-disabled="true">Download x86_64</a>
+          </article>
+        </div>
+        <p class="foot">Se um ABI nao aparecer, verifique se o asset correspondente foi enviado no release.</p>
+      </div>
+
+      <div id="panel-windows" class="hidden" role="tabpanel">
+        <article class="card" style="max-width:560px;">
+          <h3>Windows</h3>
+          <p class="status">Em desenvolvimento.</p>
+          <p class="meta">A versao para Windows ainda nao esta disponivel para download publico.</p>
+        </article>
+      </div>
+
+      <div id="panel-linux" class="hidden" role="tabpanel">
+        <article class="card" style="max-width:560px;">
+          <h3>Linux</h3>
+          <p class="status">Em desenvolvimento.</p>
+          <p class="meta">A versao para Linux ainda nao esta disponivel para download publico.</p>
+        </article>
+      </div>
+
+      <p class="foot">Repositorio: <a href="https://github.com/RochaProjects/RochaLauncher" target="_blank" rel="noopener" style="color:#c7a7ff;">RochaProjects/RochaLauncher</a></p>
+    </section>
+  </main>
+
+  <script>
+    const owner = "RochaProjects";
+    const repo = "RochaLauncher";
+    const apiLatest = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
+
+    const ui = {
+      status: document.getElementById("release-status"),
+      arm64: { btn: document.getElementById("btn-arm64"), meta: document.getElementById("meta-arm64") },
+      armv7: { btn: document.getElementById("btn-armv7"), meta: document.getElementById("meta-armv7") },
+      x64: { btn: document.getElementById("btn-x64"), meta: document.getElementById("meta-x64") },
+    };
+
+    function humanSize(bytes) {
+      if (!Number.isFinite(bytes)) return "-";
+      const units = ["B", "KB", "MB", "GB"];
+      let n = bytes;
+      let i = 0;
+      while (n >= 1024 && i < units.length - 1) {
+        n /= 1024;
+        i++;
+      }
+      return `${n.toFixed(i === 0 ? 0 : 1)} ${units[i]}`;
+    }
+
+    function setAsset(target, asset) {
+      if (!asset) {
+        target.meta.textContent = "Asset nao encontrado neste release.";
+        target.btn.setAttribute("aria-disabled", "true");
+        target.btn.removeAttribute("href");
+        return;
+      }
+      target.meta.textContent = `${asset.name} - ${humanSize(asset.size)}`;
+      target.btn.href = asset.browser_download_url;
+      target.btn.setAttribute("aria-disabled", "false");
+    }
+
+    async function loadLatestRelease() {
+      try {
+        const res = await fetch(apiLatest, { headers: { "Accept": "application/vnd.github+json" } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const release = await res.json();
+        const assets = Array.isArray(release.assets) ? release.assets : [];
+
+        const find = (matcher) => assets.find(a => matcher(a.name.toLowerCase()));
+
+        const arm64 = find(n => n.includes("arm64-v8a") && n.endsWith(".apk"));
+        const armv7 = find(n => (n.includes("armeabi-v7a") || n.includes("android-arm")) && n.endsWith(".apk"));
+        const x64 = find(n => (n.includes("x86_64") || n.includes("android-x64")) && n.endsWith(".apk"));
+
+        setAsset(ui.arm64, arm64);
+        setAsset(ui.armv7, armv7);
+        setAsset(ui.x64, x64);
+
+        const tag = release.tag_name || "sem tag";
+        const pub = release.published_at ? new Date(release.published_at).toLocaleString("pt-BR") : "data nao informada";
+        ui.status.innerHTML = `<span class="ok">Release: ${tag}</span> - ${pub}`;
+      } catch (err) {
+        ui.status.innerHTML = `<span class="danger">Nao foi possivel carregar o release automatico.</span> Use a pagina de releases manual.`;
+        const fallback = `https://github.com/${owner}/${repo}/releases`;
+        [ui.arm64, ui.armv7, ui.x64].forEach(t => {
+          t.meta.innerHTML = `Abra manualmente: <a href="${fallback}" target="_blank" rel="noopener" style="color:#c7a7ff;">Releases</a>`;
+          t.btn.setAttribute("aria-disabled", "true");
+          t.btn.removeAttribute("href");
+        });
+      }
+    }
+
+    function setupDeviceTabs() {
+      const tabs = [...document.querySelectorAll(".chip[data-device]")];
+      const panels = {
+        android: document.getElementById("panel-android"),
+        windows: document.getElementById("panel-windows"),
+        linux: document.getElementById("panel-linux"),
+      };
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(t => {
+            t.classList.remove("active");
+            t.setAttribute("aria-selected", "false");
+          });
+          tab.classList.add("active");
+          tab.setAttribute("aria-selected", "true");
+
+          const key = tab.dataset.device;
+          Object.entries(panels).forEach(([k, panel]) => {
+            panel.classList.toggle("hidden", k !== key);
+          });
+        });
+      });
+    }
+
+    setupDeviceTabs();
+    loadLatestRelease();
+  </script>
+</body>
+</html>
