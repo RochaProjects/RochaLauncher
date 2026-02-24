@@ -5,7 +5,6 @@
 <h1 align="center">RochaLauncher</h1>
 <p align="center">Minecraft Launcher BR</p>
 
-# RochaLauncher
 ### Minecraft Launcher BR
 
 <p align="left">
