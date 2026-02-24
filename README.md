@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/RochaProjects/RochaLauncher/main/assets/ic_launcher.png" width="140" alt="Rocha Launcher">
+</p>
+
+<h1 align="center">RochaLauncher</h1>
+<p align="center">Minecraft Launcher BR</p>
+
 # RochaLauncher
 ### Minecraft Launcher BR
 
