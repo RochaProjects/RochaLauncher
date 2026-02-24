@@ -68,6 +68,42 @@
       gap: 10px;
     }
 
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-right: 4px;
+      padding-right: 8px;
+      border-right: 1px solid #343a4d;
+    }
+
+    .lang-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid #4a4d5d;
+      background: rgba(39, 42, 55, 0.72);
+      color: #eceffc;
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .lang-btn:hover {
+      border-color: #73798f;
+      background: rgba(53, 56, 73, 0.86);
+      transform: translateY(-1px);
+    }
+
+    .lang-btn.active {
+      border-color: #8a52ff;
+      background: rgba(123, 92, 255, 0.35);
+    }
+
     .icon-link {
       width: 34px;
       height: 34px;
@@ -584,6 +620,16 @@
         font-size: 1.45rem;
       }
 
+      .top-links {
+        gap: 7px;
+      }
+
+      .lang-switch {
+        gap: 5px;
+        margin-right: 2px;
+        padding-right: 6px;
+      }
+
       .hero {
         padding-top: 22px;
       }
@@ -638,18 +684,22 @@
   <div class="app">
     <header class="topbar">
       <div class="brand">Rocha Launcher</div>
-      <nav class="top-links" aria-label="Links">
-        <a class="icon-link" href="https://github.com/RochaProjects/RochaLauncher" target="_blank" rel="noopener" aria-label="GitHub">
+      <nav class="top-links" aria-label="Links" data-i18n-aria="topNavAria">
+        <div class="lang-switch" role="group" aria-label="Selecionar idioma" data-i18n-aria="languageSelectorAria">
+          <button class="lang-btn active" type="button" data-lang="pt" aria-label="Portugues (Brasil)" data-i18n-aria="langPtAria">🇧🇷</button>
+          <button class="lang-btn" type="button" data-lang="en" aria-label="English" data-i18n-aria="langEnAria">🇺🇸</button>
+        </div>
+        <a class="icon-link" href="https://github.com/RochaProjects/RochaLauncher" target="_blank" rel="noopener" aria-label="GitHub" data-i18n-aria="githubAria">
           <svg viewBox="0 0 16 16" aria-hidden="true">
             <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52 0-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.7 7.7 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
           </svg>
         </a>
-        <a class="icon-link" href="#" aria-label="Discord">
+        <a class="icon-link" href="#" aria-label="Discord" data-i18n-aria="discordAria">
           <svg viewBox="0 0 16 16" aria-hidden="true">
             <path d="M13.55 3.1a13.9 13.9 0 0 0-3.43-1.05.05.05 0 0 0-.06.03c-.15.27-.32.62-.44.9a12.9 12.9 0 0 0-3.24 0 8.8 8.8 0 0 0-.45-.9.05.05 0 0 0-.06-.03A13.8 13.8 0 0 0 2.45 3.1a.04.04 0 0 0-.02.02C.25 6.34-.32 9.5.02 12.62a.05.05 0 0 0 .02.04 13.9 13.9 0 0 0 4.21 2.13.05.05 0 0 0 .06-.02c.33-.45.62-.93.87-1.44a.05.05 0 0 0-.03-.07 9.1 9.1 0 0 1-1.32-.63.05.05 0 0 1 0-.08c.09-.07.18-.14.26-.21a.05.05 0 0 1 .05-.01c2.77 1.27 5.77 1.27 8.5 0a.05.05 0 0 1 .05.01l.27.21a.05.05 0 0 1 0 .08c-.42.25-.86.46-1.32.63a.05.05 0 0 0-.03.07c.25.5.54.98.87 1.44a.05.05 0 0 0 .06.02 13.9 13.9 0 0 0 4.2-2.13.05.05 0 0 0 .03-.04c.4-3.6-.67-6.72-2.4-9.5a.04.04 0 0 0-.02-.02ZM5.35 10.7c-.83 0-1.52-.76-1.52-1.7 0-.94.67-1.7 1.52-1.7.85 0 1.53.77 1.52 1.7 0 .94-.67 1.7-1.52 1.7Zm5.3 0c-.84 0-1.52-.76-1.52-1.7 0-.94.67-1.7 1.52-1.7.85 0 1.53.77 1.52 1.7 0 .94-.67 1.7-1.52 1.7Z"/>
           </svg>
         </a>
-        <a class="icon-link text" href="#" aria-label="FAQ">?</a>
+        <a class="icon-link text" href="#" aria-label="FAQ" data-i18n-aria="faqAria">?</a>
       </nav>
     </header>
 
@@ -660,25 +710,25 @@
         </div>
 
         <h1 class="title">
-          Bem-vindo(a) ao
-          <span class="title-accent">Rocha Launcher</span>
+          <span data-i18n="heroTitlePrefix">Bem-vindo(a) ao</span>
+          <span class="title-accent" data-i18n="heroTitleBrand">Rocha Launcher</span>
         </h1>
 
-        <p class="desc">
+        <p class="desc" data-i18n="heroDescription">
           Launcher para Minecraft Bedrock com foco em versao isolada, gerenciamento de mundos,
           resource packs, behavior packs e ferramentas de sobreposicao.
         </p>
 
-        <div class="chips" aria-label="Recursos">
-          <span class="chip">Android arm64-v8a</span>
-          <span class="chip">armeabi-v7a</span>
-          <span class="chip">x86_64</span>
-          <span class="chip">Runtime isolado</span>
+        <div class="chips" aria-label="Recursos" data-i18n-aria="chipsAria">
+          <span class="chip" data-i18n="chipArm64">Android arm64-v8a</span>
+          <span class="chip" data-i18n="chipArm32">armeabi-v7a</span>
+          <span class="chip" data-i18n="chipX64">x86_64</span>
+          <span class="chip" data-i18n="chipIsolated">Runtime isolado</span>
         </div>
 
         <div class="actions">
-          <button id="open-download-modal" class="btn primary" type="button">Download</button>
-          <a class="btn ghost" href="#">Documentacao</a>
+          <button id="open-download-modal" class="btn primary" type="button" data-i18n="downloadButton">Download</button>
+          <a class="btn ghost" href="#" data-i18n="docsButton">Documentacao</a>
         </div>
 
         <div class="down" aria-hidden="true">↓</div>
@@ -687,9 +737,9 @@
 
     <section class="features">
       <div class="features-head">
-        <span class="features-pill">Características</span>
-        <h2 class="features-title">Ferramenta de gerenciamento poderoso</h2>
-        <p class="features-sub">
+        <span class="features-pill" data-i18n="featuresPill">Características</span>
+        <h2 class="features-title" data-i18n="featuresTitle">Ferramenta de gerenciamento poderoso</h2>
+        <p class="features-sub" data-i18n="featuresSubtitle">
           Descubra os principais recursos que fazem do Rocha Launcher a melhor escolha para gerenciar o Minecraft Bedrock.
         </p>
       </div>
@@ -697,90 +747,90 @@
       <div class="feature-stack">
         <article class="feature-row">
           <div class="feature-media">
-            <button class="feature-image-btn" type="button" data-preview-src="assets/1_0.png" data-preview-title="Tela Inicial">
-              <img src="assets/1_0.png" alt="Tela inicial">
+            <button class="feature-image-btn" type="button" data-preview-src="assets/1_0.png" data-preview-title-key="featureHomeTop">
+              <img src="assets/1_0.png" alt="Tela inicial" data-i18n-alt="featureHomeImageAlt">
             </button>
           </div>
           <div class="feature-content">
-            <span class="feature-top">Tela Inicial</span>
-            <h3 class="feature-name">Painel principal com detalhes globais</h3>
-            <p class="feature-desc">Area principal do launcher com status da instancia ativa, informacoes de versao e atalhos de acesso rapido.</p>
+            <span class="feature-top" data-i18n="featureHomeTop">Tela Inicial</span>
+            <h3 class="feature-name" data-i18n="featureHomeName">Painel principal com detalhes globais</h3>
+            <p class="feature-desc" data-i18n="featureHomeDesc">Area principal do launcher com status da instancia ativa, informacoes de versao e atalhos de acesso rapido.</p>
             <ul class="feature-list">
-              <li>Resumo visual da versao ativa</li>
-              <li>Fluxo rapido para iniciar o jogo</li>
-              <li>Atalhos para funcoes principais</li>
+              <li data-i18n="featureHomeItem1">Resumo visual da versao ativa</li>
+              <li data-i18n="featureHomeItem2">Fluxo rapido para iniciar o jogo</li>
+              <li data-i18n="featureHomeItem3">Atalhos para funcoes principais</li>
             </ul>
           </div>
         </article>
 
         <article class="feature-row reverse">
           <div class="feature-media">
-            <button class="feature-image-btn" type="button" data-preview-src="assets/1_1.png" data-preview-title="Selecionar Versao">
-              <img src="assets/1_1.png" alt="Selecionar versao">
+            <button class="feature-image-btn" type="button" data-preview-src="assets/1_1.png" data-preview-title-key="featureVersionTop">
+              <img src="assets/1_1.png" alt="Selecionar versao" data-i18n-alt="featureVersionImageAlt">
             </button>
           </div>
           <div class="feature-content">
-            <span class="feature-top">Selecionar Versao</span>
-            <h3 class="feature-name">Troca de versoes locais e instaladas</h3>
-            <p class="feature-desc">Fluxo para selecionar rapidamente qual pacote/versao sera iniciado, mantendo organizacao entre opcoes locais e pacote oficial.</p>
+            <span class="feature-top" data-i18n="featureVersionTop">Selecionar Versao</span>
+            <h3 class="feature-name" data-i18n="featureVersionName">Troca de versoes locais e instaladas</h3>
+            <p class="feature-desc" data-i18n="featureVersionDesc">Fluxo para selecionar rapidamente qual pacote/versao sera iniciado, mantendo organizacao entre opcoes locais e pacote oficial.</p>
             <ul class="feature-list">
-              <li>Selecao por instancia</li>
-              <li>Compatibilidade por ABI</li>
-              <li>Controle de inicializacao</li>
+              <li data-i18n="featureVersionItem1">Selecao por instancia</li>
+              <li data-i18n="featureVersionItem2">Compatibilidade por ABI</li>
+              <li data-i18n="featureVersionItem3">Controle de inicializacao</li>
             </ul>
           </div>
         </article>
 
         <article class="feature-row">
           <div class="feature-media">
-            <button class="feature-image-btn" type="button" data-preview-src="assets/1_2.png" data-preview-title="Gerenciador de Arquivos">
-              <img src="assets/1_2.png" alt="Gerenciador de arquivos">
+            <button class="feature-image-btn" type="button" data-preview-src="assets/1_2.png" data-preview-title-key="featureFilesTop">
+              <img src="assets/1_2.png" alt="Gerenciador de arquivos" data-i18n-alt="featureFilesImageAlt">
             </button>
           </div>
           <div class="feature-content">
-            <span class="feature-top">Gerenciador de Arquivos</span>
-            <h3 class="feature-name">Abas para mundos, packs e edicao de options</h3>
-            <p class="feature-desc">Interface focada em manutencao de conteudo, com categorias separadas para organizar e operar os arquivos do jogo.</p>
+            <span class="feature-top" data-i18n="featureFilesTop">Gerenciador de Arquivos</span>
+            <h3 class="feature-name" data-i18n="featureFilesName">Abas para mundos, packs e edicao de options</h3>
+            <p class="feature-desc" data-i18n="featureFilesDesc">Interface focada em manutencao de conteudo, com categorias separadas para organizar e operar os arquivos do jogo.</p>
             <ul class="feature-list">
-              <li>Listagem por categoria</li>
-              <li>Acoes de exportar e remover</li>
-              <li>Editor de options integrado</li>
+              <li data-i18n="featureFilesItem1">Listagem por categoria</li>
+              <li data-i18n="featureFilesItem2">Acoes de exportar e remover</li>
+              <li data-i18n="featureFilesItem3">Editor de options integrado</li>
             </ul>
           </div>
         </article>
 
         <article class="feature-row reverse">
           <div class="feature-media">
-            <button class="feature-image-btn" type="button" data-preview-src="assets/1_3.png" data-preview-title="Gerenciar Contas">
-              <img src="assets/1_3.png" alt="Gerenciar contas">
+            <button class="feature-image-btn" type="button" data-preview-src="assets/1_3.png" data-preview-title-key="featureAccountsTop">
+              <img src="assets/1_3.png" alt="Gerenciar contas" data-i18n-alt="featureAccountsImageAlt">
             </button>
           </div>
           <div class="feature-content">
-            <span class="feature-top">Gerenciar Contas</span>
-            <h3 class="feature-name">Controle de perfis e dados de conta</h3>
-            <p class="feature-desc">Tela dedicada para visualizar, trocar e administrar contas usadas no launcher com interface clara e focada.</p>
+            <span class="feature-top" data-i18n="featureAccountsTop">Gerenciar Contas</span>
+            <h3 class="feature-name" data-i18n="featureAccountsName">Controle de perfis e dados de conta</h3>
+            <p class="feature-desc" data-i18n="featureAccountsDesc">Tela dedicada para visualizar, trocar e administrar contas usadas no launcher com interface clara e focada.</p>
             <ul class="feature-list">
-              <li>Perfis organizados</li>
-              <li>Avatar e identificacao</li>
-              <li>Gestao centralizada</li>
+              <li data-i18n="featureAccountsItem1">Perfis organizados</li>
+              <li data-i18n="featureAccountsItem2">Avatar e identificacao</li>
+              <li data-i18n="featureAccountsItem3">Gestao centralizada</li>
             </ul>
           </div>
         </article>
 
         <article class="feature-row">
           <div class="feature-media">
-            <button class="feature-image-btn" type="button" data-preview-src="assets/1_4.png" data-preview-title="Toolbox">
-              <img src="assets/1_4.png" alt="Toolbox">
+            <button class="feature-image-btn" type="button" data-preview-src="assets/1_4.png" data-preview-title-key="featureToolboxTop">
+              <img src="assets/1_4.png" alt="Toolbox" data-i18n-alt="featureToolboxImageAlt">
             </button>
           </div>
           <div class="feature-content">
-            <span class="feature-top">Toolbox</span>
-            <h3 class="feature-name">Ferramentas de sobreposicao durante o jogo</h3>
-            <p class="feature-desc">Conjunto de utilitarios de overlay para acesso rapido em jogo, com foco em usabilidade e configuracao simplificada.</p>
+            <span class="feature-top" data-i18n="featureToolboxTop">Toolbox</span>
+            <h3 class="feature-name" data-i18n="featureToolboxName">Ferramentas de sobreposicao durante o jogo</h3>
+            <p class="feature-desc" data-i18n="featureToolboxDesc">Conjunto de utilitarios de overlay para acesso rapido em jogo, com foco em usabilidade e configuracao simplificada.</p>
             <ul class="feature-list">
-              <li>Acesso in-game</li>
-              <li>Acoes rapidas</li>
-              <li>Base para recursos futuros</li>
+              <li data-i18n="featureToolboxItem1">Acesso in-game</li>
+              <li data-i18n="featureToolboxItem2">Acoes rapidas</li>
+              <li data-i18n="featureToolboxItem3">Base para recursos futuros</li>
             </ul>
           </div>
         </article>
@@ -790,11 +840,11 @@
     <div id="image-modal" class="image-modal" aria-hidden="true">
       <div class="image-modal-card">
         <div class="image-modal-head">
-          <span id="image-modal-title">Preview</span>
-          <button id="image-modal-close" class="image-modal-close" type="button" aria-label="Fechar preview">×</button>
+          <span id="image-modal-title" data-i18n="previewTitle">Preview</span>
+          <button id="image-modal-close" class="image-modal-close" type="button" aria-label="Fechar preview" data-i18n-aria="closePreviewAria">×</button>
         </div>
         <div class="image-modal-body">
-          <img id="image-modal-img" src="" alt="Preview ampliado">
+          <img id="image-modal-img" src="" alt="Preview ampliado" data-i18n-alt="previewImageAlt">
         </div>
       </div>
     </div>
@@ -802,30 +852,30 @@
     <div id="download-modal" class="download-modal" aria-hidden="true">
       <div class="download-modal-card">
         <div class="download-modal-head">
-          <div class="download-modal-title">Downloads</div>
-          <button id="download-modal-close" class="download-modal-close" type="button" aria-label="Fechar menu de download">×</button>
+          <div class="download-modal-title" data-i18n="downloadsTitle">Downloads</div>
+          <button id="download-modal-close" class="download-modal-close" type="button" aria-label="Fechar menu de download" data-i18n-aria="closeDownloadMenuAria">×</button>
         </div>
         <div class="download-modal-body">
           <div class="platform-toggle">
-            <button class="platform-btn active" type="button" data-platform="android">Android</button>
-            <button class="platform-btn" type="button" data-platform="windows">Windows</button>
-            <button class="platform-btn" type="button" data-platform="linux">Linux</button>
+            <button class="platform-btn active" type="button" data-platform="android" data-i18n="platformAndroid">Android</button>
+            <button class="platform-btn" type="button" data-platform="windows" data-i18n="platformWindows">Windows</button>
+            <button class="platform-btn" type="button" data-platform="linux" data-i18n="platformLinux">Linux</button>
           </div>
 
           <div class="download-field">
-            <label class="download-label" for="download-abi">Arquitetura (ABI)</label>
+            <label class="download-label" for="download-abi" data-i18n="downloadAbiLabel">Arquitetura (ABI)</label>
             <select id="download-abi" class="download-select">
-              <option value="arm64-v8a">arm64-v8a (64-bit)</option>
-              <option value="armeabi-v7a">armeabi-v7a (32-bit)</option>
-              <option value="x86_64">x86_64</option>
+              <option value="arm64-v8a" data-i18n="abiArm64">arm64-v8a (64-bit)</option>
+              <option value="armeabi-v7a" data-i18n="abiArm32">armeabi-v7a (32-bit)</option>
+              <option value="x86_64" data-i18n="abiX64">x86_64</option>
             </select>
           </div>
 
-          <div id="download-status" class="download-status">
+          <div id="download-status" class="download-status" data-i18n="downloadInitialStatus">
             Selecione uma ABI para Android. Windows e Linux estão em desenvolvimento.
           </div>
 
-          <button id="download-action" class="btn primary download-action" type="button">Baixar APK</button>
+          <button id="download-action" class="btn primary download-action" type="button" data-i18n="downloadApkButton">Baixar APK</button>
         </div>
       </div>
     </div>
@@ -836,6 +886,196 @@
     const repo = "RochaLauncher";
     const apiLatest = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
     const releasesPage = `https://github.com/${owner}/${repo}/releases/latest`;
+    const languageStorageKey = "rocha_site_language";
+    const languageLocales = { pt: "pt-BR", en: "en-US" };
+    const platformLabelKeys = {
+      android: "platformAndroid",
+      windows: "platformWindows",
+      linux: "platformLinux",
+    };
+    const translations = {
+      pt: {
+        topNavAria: "Links",
+        languageSelectorAria: "Selecionar idioma",
+        langPtAria: "Portugues (Brasil)",
+        langEnAria: "English",
+        githubAria: "GitHub",
+        discordAria: "Discord",
+        faqAria: "FAQ",
+        heroTitlePrefix: "Bem-vindo(a) ao",
+        heroTitleBrand: "Rocha Launcher",
+        heroDescription:
+          "Launcher para Minecraft Bedrock com foco em versao isolada, gerenciamento de mundos, resource packs, behavior packs e ferramentas de sobreposicao.",
+        chipsAria: "Recursos",
+        chipArm64: "Android arm64-v8a",
+        chipArm32: "armeabi-v7a",
+        chipX64: "x86_64",
+        chipIsolated: "Runtime isolado",
+        downloadButton: "Download",
+        docsButton: "Documentacao",
+        featuresPill: "Características",
+        featuresTitle: "Ferramenta de gerenciamento poderoso",
+        featuresSubtitle:
+          "Descubra os principais recursos que fazem do Rocha Launcher a melhor escolha para gerenciar o Minecraft Bedrock.",
+        featureHomeImageAlt: "Tela inicial",
+        featureHomeTop: "Tela Inicial",
+        featureHomeName: "Painel principal com detalhes globais",
+        featureHomeDesc:
+          "Area principal do launcher com status da instancia ativa, informacoes de versao e atalhos de acesso rapido.",
+        featureHomeItem1: "Resumo visual da versao ativa",
+        featureHomeItem2: "Fluxo rapido para iniciar o jogo",
+        featureHomeItem3: "Atalhos para funcoes principais",
+        featureVersionImageAlt: "Selecionar versao",
+        featureVersionTop: "Selecionar Versao",
+        featureVersionName: "Troca de versoes locais e instaladas",
+        featureVersionDesc:
+          "Fluxo para selecionar rapidamente qual pacote/versao sera iniciado, mantendo organizacao entre opcoes locais e pacote oficial.",
+        featureVersionItem1: "Selecao por instancia",
+        featureVersionItem2: "Compatibilidade por ABI",
+        featureVersionItem3: "Controle de inicializacao",
+        featureFilesImageAlt: "Gerenciador de arquivos",
+        featureFilesTop: "Gerenciador de Arquivos",
+        featureFilesName: "Abas para mundos, packs e edicao de options",
+        featureFilesDesc:
+          "Interface focada em manutencao de conteudo, com categorias separadas para organizar e operar os arquivos do jogo.",
+        featureFilesItem1: "Listagem por categoria",
+        featureFilesItem2: "Acoes de exportar e remover",
+        featureFilesItem3: "Editor de options integrado",
+        featureAccountsImageAlt: "Gerenciar contas",
+        featureAccountsTop: "Gerenciar Contas",
+        featureAccountsName: "Controle de perfis e dados de conta",
+        featureAccountsDesc:
+          "Tela dedicada para visualizar, trocar e administrar contas usadas no launcher com interface clara e focada.",
+        featureAccountsItem1: "Perfis organizados",
+        featureAccountsItem2: "Avatar e identificacao",
+        featureAccountsItem3: "Gestao centralizada",
+        featureToolboxImageAlt: "Toolbox",
+        featureToolboxTop: "Toolbox",
+        featureToolboxName: "Ferramentas de sobreposicao durante o jogo",
+        featureToolboxDesc:
+          "Conjunto de utilitarios de overlay para acesso rapido em jogo, com foco em usabilidade e configuracao simplificada.",
+        featureToolboxItem1: "Acesso in-game",
+        featureToolboxItem2: "Acoes rapidas",
+        featureToolboxItem3: "Base para recursos futuros",
+        previewTitle: "Preview",
+        closePreviewAria: "Fechar preview",
+        previewImageAlt: "Preview ampliado",
+        downloadsTitle: "Downloads",
+        closeDownloadMenuAria: "Fechar menu de download",
+        platformAndroid: "Android",
+        platformWindows: "Windows",
+        platformLinux: "Linux",
+        downloadAbiLabel: "Arquitetura (ABI)",
+        abiArm64: "arm64-v8a (64-bit)",
+        abiArm32: "armeabi-v7a (32-bit)",
+        abiX64: "x86_64",
+        downloadInitialStatus:
+          "Selecione uma ABI para Android. Windows e Linux estão em desenvolvimento.",
+        downloadApkButton: "Baixar APK",
+        loadingLatestRelease: "Carregando ultimo release...",
+        loading: "Carregando...",
+        releaseWord: "Release",
+        releaseFoundNoTag: "Release encontrada",
+        releaseWithAsset: "{release}. Arquivo: {file}",
+        downloadAbiAction: "Baixar {abi}",
+        releaseWithoutAbi: "Release carregada, mas sem asset para ABI {abi}.",
+        unavailable: "Indisponível",
+        releaseLoadFailed: "Nao foi possivel carregar o release. Abra a pagina de releases ou tente novamente.",
+        openReleases: "Abrir releases",
+        platformInDevelopment: "{platform} está em desenvolvimento no momento.",
+        development: "Em desenvolvimento",
+      },
+      en: {
+        topNavAria: "Links",
+        languageSelectorAria: "Select language",
+        langPtAria: "Portuguese (Brazil)",
+        langEnAria: "English",
+        githubAria: "GitHub",
+        discordAria: "Discord",
+        faqAria: "FAQ",
+        heroTitlePrefix: "Welcome to",
+        heroTitleBrand: "Rocha Launcher",
+        heroDescription:
+          "Minecraft Bedrock launcher focused on isolated runtime, world management, resource packs, behavior packs, and overlay tools.",
+        chipsAria: "Features",
+        chipArm64: "Android arm64-v8a",
+        chipArm32: "armeabi-v7a",
+        chipX64: "x86_64",
+        chipIsolated: "Isolated runtime",
+        downloadButton: "Download",
+        docsButton: "Documentation",
+        featuresPill: "Features",
+        featuresTitle: "Powerful management toolkit",
+        featuresSubtitle:
+          "Discover the main features that make Rocha Launcher a strong choice for managing Minecraft Bedrock.",
+        featureHomeImageAlt: "Home screen",
+        featureHomeTop: "Home Screen",
+        featureHomeName: "Main panel with global details",
+        featureHomeDesc:
+          "Launcher home area with active instance status, version details, and quick access shortcuts.",
+        featureHomeItem1: "Visual summary of active version",
+        featureHomeItem2: "Fast flow to start the game",
+        featureHomeItem3: "Shortcuts for core features",
+        featureVersionImageAlt: "Version selector",
+        featureVersionTop: "Version Selector",
+        featureVersionName: "Switch between local and installed versions",
+        featureVersionDesc:
+          "Quick flow to choose which package/version will start, keeping local options and official package organized.",
+        featureVersionItem1: "Instance-based selection",
+        featureVersionItem2: "ABI compatibility",
+        featureVersionItem3: "Launch control",
+        featureFilesImageAlt: "File manager",
+        featureFilesTop: "File Manager",
+        featureFilesName: "Tabs for worlds, packs, and options editing",
+        featureFilesDesc:
+          "Content maintenance interface with separated categories to organize and operate game files.",
+        featureFilesItem1: "Category-based listing",
+        featureFilesItem2: "Export and remove actions",
+        featureFilesItem3: "Integrated options editor",
+        featureAccountsImageAlt: "Account management",
+        featureAccountsTop: "Manage Accounts",
+        featureAccountsName: "Profile and account data control",
+        featureAccountsDesc:
+          "Dedicated screen to view, switch, and manage launcher accounts with a clear and focused interface.",
+        featureAccountsItem1: "Organized profiles",
+        featureAccountsItem2: "Avatar and identity",
+        featureAccountsItem3: "Centralized management",
+        featureToolboxImageAlt: "Toolbox",
+        featureToolboxTop: "Toolbox",
+        featureToolboxName: "In-game overlay tools",
+        featureToolboxDesc:
+          "Overlay utility set for quick in-game access, focused on usability and simplified configuration.",
+        featureToolboxItem1: "In-game access",
+        featureToolboxItem2: "Quick actions",
+        featureToolboxItem3: "Foundation for future features",
+        previewTitle: "Preview",
+        closePreviewAria: "Close preview",
+        previewImageAlt: "Expanded preview",
+        downloadsTitle: "Downloads",
+        closeDownloadMenuAria: "Close download menu",
+        platformAndroid: "Android",
+        platformWindows: "Windows",
+        platformLinux: "Linux",
+        downloadAbiLabel: "Architecture (ABI)",
+        abiArm64: "arm64-v8a (64-bit)",
+        abiArm32: "armeabi-v7a (32-bit)",
+        abiX64: "x86_64",
+        downloadInitialStatus: "Select an Android ABI. Windows and Linux are currently in development.",
+        downloadApkButton: "Download APK",
+        loadingLatestRelease: "Loading latest release...",
+        loading: "Loading...",
+        releaseWord: "Release",
+        releaseFoundNoTag: "Release found",
+        releaseWithAsset: "{release}. File: {file}",
+        downloadAbiAction: "Download {abi}",
+        releaseWithoutAbi: "Release loaded, but no asset was found for ABI {abi}.",
+        unavailable: "Unavailable",
+        releaseLoadFailed: "Could not load release. Open releases page or try again.",
+        openReleases: "Open releases",
+        platformInDevelopment: "{platform} is currently in development.",
+        development: "In development",
+      },
+    };
 
     const imageModal = document.getElementById("image-modal");
     const imageModalTitle = document.getElementById("image-modal-title");
@@ -845,15 +1085,19 @@
     const downloadModal = document.getElementById("download-modal");
     const downloadModalClose = document.getElementById("download-modal-close");
     const platformButtons = Array.from(document.querySelectorAll(".platform-btn"));
+    const languageButtons = Array.from(document.querySelectorAll(".lang-btn"));
     const downloadAbi = document.getElementById("download-abi");
     const downloadStatus = document.getElementById("download-status");
     const downloadAction = document.getElementById("download-action");
+    const savedLanguage = localStorage.getItem(languageStorageKey);
+    let currentLang = savedLanguage === "en" ? "en" : "pt";
+    let currentPreviewTitleKey = "";
     let selectedPlatform = "android";
     let releaseState = {
       loaded: false,
       loading: false,
       tag: "",
-      publishedAt: "",
+      publishedAtRaw: "",
       android: {
         "arm64-v8a": null,
         "armeabi-v7a": null,
@@ -861,11 +1105,50 @@
       },
     };
 
+    function t(key, vars = {}) {
+      const template = translations[currentLang]?.[key] ?? translations.pt[key] ?? key;
+      return template.replace(/\{(\w+)\}/g, (_, token) => `${vars[token] ?? ""}`);
+    }
+
+    function currentLocale() {
+      return languageLocales[currentLang] || languageLocales.pt;
+    }
+
+    function applyTranslations() {
+      document.documentElement.lang = currentLocale();
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        node.textContent = t(node.dataset.i18n);
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach((node) => {
+        node.setAttribute("aria-label", t(node.dataset.i18nAria));
+      });
+      document.querySelectorAll("[data-i18n-alt]").forEach((node) => {
+        node.setAttribute("alt", t(node.dataset.i18nAlt));
+      });
+      if (imageModal.classList.contains("open") && currentPreviewTitleKey) {
+        imageModalTitle.textContent = t(currentPreviewTitleKey);
+      }
+      renderDownloadState();
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang === "en" ? "en" : "pt";
+      localStorage.setItem(languageStorageKey, currentLang);
+      languageButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === currentLang);
+      });
+      applyTranslations();
+    }
+
     function formatDate(dateIso) {
       if (!dateIso) return "";
       const date = new Date(dateIso);
       if (Number.isNaN(date.getTime())) return "";
-      return date.toLocaleString("pt-BR");
+      return date.toLocaleString(currentLocale());
+    }
+
+    function platformLabel(platform) {
+      return t(platformLabelKeys[platform] || "platformAndroid");
     }
 
     function findAssetByMatcher(assets, matcher) {
@@ -890,7 +1173,7 @@
           loaded: true,
           loading: false,
           tag: release.tag_name || "",
-          publishedAt: formatDate(release.published_at),
+          publishedAtRaw: release.published_at || "",
           android: {
             "arm64-v8a": findAssetByMatcher(assets, (n) => n.includes("arm64-v8a") && n.endsWith(".apk")),
             "armeabi-v7a": findAssetByMatcher(
@@ -910,9 +1193,10 @@
       renderDownloadState();
     }
 
-    function openImageModal(src, title) {
+    function openImageModal(src, title, titleKey = "") {
+      currentPreviewTitleKey = titleKey;
       imageModalImg.src = src;
-      imageModalTitle.textContent = title || "Preview";
+      imageModalTitle.textContent = title || t("previewTitle");
       imageModal.classList.add("open");
       imageModal.setAttribute("aria-hidden", "false");
     }
@@ -941,8 +1225,8 @@
 
       if (releaseState.loading) {
         downloadAbi.disabled = true;
-        downloadStatus.textContent = "Carregando ultimo release...";
-        downloadAction.textContent = "Carregando...";
+        downloadStatus.textContent = t("loadingLatestRelease");
+        downloadAction.textContent = t("loading");
         downloadAction.disabled = true;
         downloadAction.dataset.downloadUrl = "";
         return;
@@ -953,16 +1237,17 @@
         const abi = downloadAbi.value;
         const asset = releaseState.android[abi];
         if (asset) {
+          const publishedAt = formatDate(releaseState.publishedAtRaw);
           const releaseText = releaseState.tag
-            ? `Release ${releaseState.tag}${releaseState.publishedAt ? ` • ${releaseState.publishedAt}` : ""}`
-            : "Release encontrada";
-          downloadStatus.textContent = `${releaseText}. Arquivo: ${asset.name}`;
-          downloadAction.textContent = `Baixar ${abi}`;
+            ? `${t("releaseWord")} ${releaseState.tag}${publishedAt ? ` • ${publishedAt}` : ""}`
+            : t("releaseFoundNoTag");
+          downloadStatus.textContent = t("releaseWithAsset", { release: releaseText, file: asset.name });
+          downloadAction.textContent = t("downloadAbiAction", { abi });
           downloadAction.disabled = false;
           downloadAction.dataset.downloadUrl = asset.browser_download_url;
         } else {
-          downloadStatus.textContent = `Release carregada, mas sem asset para ABI ${abi}.`;
-          downloadAction.textContent = "Indisponível";
+          downloadStatus.textContent = t("releaseWithoutAbi", { abi });
+          downloadAction.textContent = t("unavailable");
           downloadAction.disabled = true;
           downloadAction.dataset.downloadUrl = "";
         }
@@ -971,14 +1256,14 @@
 
       if (selectedPlatform === "android" && !releaseState.loaded) {
         downloadAbi.disabled = false;
-        downloadStatus.textContent = "Nao foi possivel carregar o release. Abra a pagina de releases ou tente novamente.";
-        downloadAction.textContent = "Abrir releases";
+        downloadStatus.textContent = t("releaseLoadFailed");
+        downloadAction.textContent = t("openReleases");
         downloadAction.disabled = false;
         downloadAction.dataset.downloadUrl = releasesPage;
       } else {
         downloadAbi.disabled = true;
-        downloadStatus.textContent = `${selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)} está em desenvolvimento no momento.`;
-        downloadAction.textContent = "Em desenvolvimento";
+        downloadStatus.textContent = t("platformInDevelopment", { platform: platformLabel(selectedPlatform) });
+        downloadAction.textContent = t("development");
         downloadAction.disabled = true;
         downloadAction.dataset.downloadUrl = "";
       }
@@ -986,7 +1271,8 @@
 
     document.querySelectorAll(".feature-image-btn").forEach((button) => {
       button.addEventListener("click", () => {
-        openImageModal(button.dataset.previewSrc, button.dataset.previewTitle);
+        const titleKey = button.dataset.previewTitleKey || "";
+        openImageModal(button.dataset.previewSrc, titleKey ? t(titleKey) : button.dataset.previewTitle, titleKey);
       });
     });
 
@@ -1005,6 +1291,12 @@
       button.addEventListener("click", () => {
         selectedPlatform = button.dataset.platform || "android";
         renderDownloadState();
+      });
+    });
+
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.lang || "pt");
       });
     });
 
@@ -1029,8 +1321,8 @@
       }
     });
 
-    renderDownloadState();
     loadLatestRelease();
+    setLanguage(currentLang);
   </script>
 </body>
 </html>
