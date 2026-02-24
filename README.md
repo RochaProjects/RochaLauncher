@@ -64,6 +64,18 @@ O **RochaLauncher** é um launcher brasileiro para Minecraft Bedrock que facilit
 
 ---
 
+## Integração CurseForge (Implementado)
+
+A tela **Biblioteca** já possui integração com o CurseForge para Minecraft Bedrock:
+
+- Busca de conteúdo com texto, categoria e ordenação
+- Listagem paginada de resultados
+- Tela de detalhes do mod/projeto
+- Consulta de arquivos de cada projeto
+- Download do arquivo selecionado e encaminhamento para importação no launcher
+
+---
+
 ## Compatibilidade
 
 | ABI | Status |
@@ -79,7 +91,7 @@ O **RochaLauncher** é um launcher brasileiro para Minecraft Bedrock que facilit
 Baixe sempre em **Releases**:
 
 - **GitHub Releases:** `https://github.com/RochaProjects/RochaLauncher/releases`
-- **Site oficial:** `https://rochaprojects.github.io/RochaLauncher/` <!-- ajuste se necessário -->
+- **Site oficial:** `https://rochaprojects.github.io/RochaLauncher/`
 
 ### Nome recomendado dos APKs (assets da release)
 
@@ -110,12 +122,12 @@ Isso facilita detecção automática de atualização por arquitetura.
 - **Backup:** cópias organizadas e exportação
 - **Importar APK:** adicionar versão local custom
 - **Toolbox:** utilidades em sobreposição
+- **Biblioteca:** pesquisa e instalação de conteúdo via CurseForge
 
 ---
 
 ## Roadmap
 
-- Biblioteca online de conteúdos (catálogo remoto)
 - Melhorias no fluxo multi-plataforma
 - Mais controles no toolbox
 - Expansão de UX para gerenciamento avançado
@@ -132,7 +144,7 @@ Isso facilita detecção automática de atualização por arquitetura.
 
 ## Comunidade
 
-- **Discord:** `SEU_LINK_AQUI`
+- **Discord:** `https://discord.gg/pEhSnkypyy`
 - **Issues/Suporte:** `https://github.com/RochaProjects/RochaLauncher/issues`
 
 ---
