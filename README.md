@@ -17,11 +17,12 @@
 
 O **RochaLauncher** é um launcher brasileiro para Minecraft Bedrock que facilita:
 
-- Gerenciar versões instaladas e versões locais 
+- Gerenciar versões instaladas e versões locais
 - Iniciar o jogo com **runtime isolado**
 - Organizar mundos, resource packs, behavior packs e skin packs
 - Criar backups e exportar conteúdo
 - Usar toolbox/sobreposição com recursos in-game
+- Gerenciar e carregar **mods externos `.so`**
 - Atualizar o app pelo GitHub Releases
 
 > Projeto focado em uso prático no Android, com suporte por ABI.
@@ -37,6 +38,12 @@ O **RochaLauncher** é um launcher brasileiro para Minecraft Bedrock que facilit
 - **Runtime isolado**
   - Isola dados por versão
   - Evita conflito entre instâncias
+
+- **Suporte a Mods Externos (`.so`)**
+  - Importação de bibliotecas nativas `.so`
+  - Lista de mods por versão (ativar/desativar, ordenar e excluir)
+  - Carregamento no launch do jogo
+  - Opção de **modo de compatibilidade de mods** nas configurações
 
 - **Gerenciador de Arquivos**
   - Abas separadas: mundos, resource packs, behavior packs e skins
@@ -108,6 +115,7 @@ Isso facilita detecção automática de atualização por arquitetura.
 3. Escolha a versão desejada (instalada/local).
 4. Clique em **Iniciar Jogo**.
 5. Use **Arquivos** para gerenciar conteúdos e backups.
+6. (Opcional) Use **Mods** para importar e controlar mods `.so`.
 
 ---
 
@@ -116,6 +124,7 @@ Isso facilita detecção automática de atualização por arquitetura.
 - **Tela Inicial:** status, versão ativa, atalhos
 - **Arquivos:** gerenciamento por categoria
 - **Backup:** cópias organizadas e exportação
+- **Mods:** importação e controle de `.so`
 - **Toolbox:** utilidades em sobreposição
 - **Biblioteca:** pesquisa e instalação de conteúdo via CurseForge
 
