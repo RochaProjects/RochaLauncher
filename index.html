@@ -905,7 +905,10 @@
     const apiLatest = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
     const releasesPage = `https://github.com/${owner}/${repo}/releases/latest`;
     const linuxLocalFallbackFile = "rocha_launcher_linux-x86_64_v1.26.0.AppImage";
-    const linuxLocalFallbackUrl = `./download/${linuxLocalFallbackFile}`;
+    const linuxLocalFallbackCandidates = [
+      `./download/${linuxLocalFallbackFile}`,
+      `./downloads/${linuxLocalFallbackFile}`,
+    ];
     const languageStorageKey = "rocha_site_language";
     const languageLocales = { pt: "pt-BR", en: "en-US" };
     const platformLabelKeys = {
@@ -1148,6 +1151,7 @@
       publishedAtRaw: "",
       linux: null,
       linuxLocalAvailable: false,
+      linuxLocalUrl: "",
       android: {
         "arm64-v8a": null,
         "armeabi-v7a": null,
@@ -1206,15 +1210,16 @@
     }
 
     async function checkLocalLinuxFallback() {
-      try {
-        const res = await fetch(linuxLocalFallbackUrl, {
-          method: "HEAD",
-          cache: "no-store",
-        });
-        return res.ok;
-      } catch (_) {
-        return false;
+      for (const candidateUrl of linuxLocalFallbackCandidates) {
+        try {
+          const res = await fetch(candidateUrl, {
+            method: "HEAD",
+            cache: "no-store",
+          });
+          if (res.ok) return candidateUrl;
+        } catch (_) {}
       }
+      return "";
     }
 
     async function loadLatestRelease() {
@@ -1233,7 +1238,7 @@
           assets,
           (n) => n.includes("linux-x86_64") && n.endsWith(".appimage")
         ) || findAssetByMatcher(assets, (n) => n.includes("linux") && n.endsWith(".appimage"));
-        const linuxLocalAvailable = await checkLocalLinuxFallback();
+        const linuxLocalUrl = await checkLocalLinuxFallback();
 
         releaseState = {
           ...releaseState,
@@ -1242,7 +1247,8 @@
           tag: release.tag_name || "",
           publishedAtRaw: release.published_at || "",
           linux: linuxAsset || null,
-          linuxLocalAvailable,
+          linuxLocalAvailable: !!linuxLocalUrl,
+          linuxLocalUrl,
           android: {
             "arm64-v8a": findAssetByMatcher(assets, (n) => n.includes("arm64-v8a") && n.endsWith(".apk")),
             "armeabi-v7a": findAssetByMatcher(
@@ -1253,13 +1259,14 @@
           },
         };
       } catch (_) {
-        const linuxLocalAvailable = await checkLocalLinuxFallback();
+        const linuxLocalUrl = await checkLocalLinuxFallback();
         releaseState = {
           ...releaseState,
           loaded: false,
           loading: false,
           linux: null,
-          linuxLocalAvailable,
+          linuxLocalAvailable: !!linuxLocalUrl,
+          linuxLocalUrl,
         };
       }
       renderDownloadState();
@@ -1353,7 +1360,7 @@
           });
           downloadAction.textContent = t("downloadLinuxButton");
           downloadAction.disabled = false;
-          downloadAction.dataset.downloadUrl = linuxLocalFallbackUrl;
+          downloadAction.dataset.downloadUrl = releaseState.linuxLocalUrl || "";
         } else {
           downloadStatus.textContent = t("linuxDownloadMissing");
           downloadAction.textContent = t("unavailable");
