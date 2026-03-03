@@ -904,6 +904,8 @@
     const repo = "RochaLauncher";
     const apiLatest = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
     const releasesPage = `https://github.com/${owner}/${repo}/releases/latest`;
+    const linuxLocalFallbackFile = "rocha_launcher_linux-x86_64_v1.26.0.AppImage";
+    const linuxLocalFallbackUrl = `./download/${linuxLocalFallbackFile}`;
     const languageStorageKey = "rocha_site_language";
     const languageLocales = { pt: "pt-BR", en: "en-US" };
     const platformLabelKeys = {
@@ -1005,6 +1007,12 @@
         releaseWithAsset: "{release}. Arquivo: {file}",
         downloadAbiAction: "Baixar {abi}",
         releaseWithoutAbi: "Release carregada, mas sem asset para ABI {abi}.",
+        linuxDownloadReady: "{release}. Arquivo Linux: {file}",
+        linuxDownloadFallbackReady:
+          "Sem asset Linux no release. Usando arquivo local: {file}",
+        linuxDownloadMissing:
+          "Sem build Linux no release e sem arquivo local em /download.",
+        downloadLinuxButton: "Baixar Linux x86_64",
         unavailable: "Indisponível",
         releaseLoadFailed: "Nao foi possivel carregar o release. Abra a pagina de releases ou tente novamente.",
         openReleases: "Abrir releases",
@@ -1103,6 +1111,12 @@
         releaseWithAsset: "{release}. File: {file}",
         downloadAbiAction: "Download {abi}",
         releaseWithoutAbi: "Release loaded, but no asset was found for ABI {abi}.",
+        linuxDownloadReady: "{release}. Linux file: {file}",
+        linuxDownloadFallbackReady:
+          "No Linux asset in release. Using local file: {file}",
+        linuxDownloadMissing:
+          "No Linux build in release and no local file in /download.",
+        downloadLinuxButton: "Download Linux x86_64",
         unavailable: "Unavailable",
         releaseLoadFailed: "Could not load release. Open releases page or try again.",
         openReleases: "Open releases",
@@ -1132,6 +1146,8 @@
       loading: false,
       tag: "",
       publishedAtRaw: "",
+      linux: null,
+      linuxLocalAvailable: false,
       android: {
         "arm64-v8a": null,
         "armeabi-v7a": null,
@@ -1189,6 +1205,18 @@
       return assets.find((asset) => matcher(asset.name.toLowerCase()));
     }
 
+    async function checkLocalLinuxFallback() {
+      try {
+        const res = await fetch(linuxLocalFallbackUrl, {
+          method: "HEAD",
+          cache: "no-store",
+        });
+        return res.ok;
+      } catch (_) {
+        return false;
+      }
+    }
+
     async function loadLatestRelease() {
       if (releaseState.loading) return;
       releaseState.loading = true;
@@ -1201,6 +1229,11 @@
 
         const release = await res.json();
         const assets = Array.isArray(release.assets) ? release.assets : [];
+        const linuxAsset = findAssetByMatcher(
+          assets,
+          (n) => n.includes("linux-x86_64") && n.endsWith(".appimage")
+        ) || findAssetByMatcher(assets, (n) => n.includes("linux") && n.endsWith(".appimage"));
+        const linuxLocalAvailable = await checkLocalLinuxFallback();
 
         releaseState = {
           ...releaseState,
@@ -1208,6 +1241,8 @@
           loading: false,
           tag: release.tag_name || "",
           publishedAtRaw: release.published_at || "",
+          linux: linuxAsset || null,
+          linuxLocalAvailable,
           android: {
             "arm64-v8a": findAssetByMatcher(assets, (n) => n.includes("arm64-v8a") && n.endsWith(".apk")),
             "armeabi-v7a": findAssetByMatcher(
@@ -1218,10 +1253,13 @@
           },
         };
       } catch (_) {
+        const linuxLocalAvailable = await checkLocalLinuxFallback();
         releaseState = {
           ...releaseState,
           loaded: false,
           loading: false,
+          linux: null,
+          linuxLocalAvailable,
         };
       }
       renderDownloadState();
@@ -1294,6 +1332,34 @@
         downloadAction.textContent = t("openReleases");
         downloadAction.disabled = false;
         downloadAction.dataset.downloadUrl = releasesPage;
+      } else if (selectedPlatform === "linux") {
+        downloadAbi.disabled = true;
+        const publishedAt = formatDate(releaseState.publishedAtRaw);
+        const releaseText = releaseState.tag
+          ? `${t("releaseWord")} ${releaseState.tag}${publishedAt ? ` • ${publishedAt}` : ""}`
+          : t("releaseFoundNoTag");
+
+        if (releaseState.linux) {
+          downloadStatus.textContent = t("linuxDownloadReady", {
+            release: releaseText,
+            file: releaseState.linux.name,
+          });
+          downloadAction.textContent = t("downloadLinuxButton");
+          downloadAction.disabled = false;
+          downloadAction.dataset.downloadUrl = releaseState.linux.browser_download_url;
+        } else if (releaseState.linuxLocalAvailable) {
+          downloadStatus.textContent = t("linuxDownloadFallbackReady", {
+            file: linuxLocalFallbackFile,
+          });
+          downloadAction.textContent = t("downloadLinuxButton");
+          downloadAction.disabled = false;
+          downloadAction.dataset.downloadUrl = linuxLocalFallbackUrl;
+        } else {
+          downloadStatus.textContent = t("linuxDownloadMissing");
+          downloadAction.textContent = t("unavailable");
+          downloadAction.disabled = true;
+          downloadAction.dataset.downloadUrl = "";
+        }
       } else {
         downloadAbi.disabled = true;
         downloadStatus.textContent = t("platformInDevelopment", { platform: platformLabel(selectedPlatform) });
